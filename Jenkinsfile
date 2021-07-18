@@ -5,6 +5,7 @@ pipeline {
             steps { 
                echo 'This is a minimal pipeline.' 
                 sh 'mvn clean install'
+                echo "Done the Build ....."
             }
         }
     }
