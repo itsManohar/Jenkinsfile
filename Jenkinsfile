@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                evho "FONR"
+                echo "FONR"
                //  sh '''
                 //    echo "PATH = ${PATH}" || true
                 //    echo "M2_HOME = ${M2_HOME}" || true
