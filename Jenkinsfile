@@ -16,17 +16,19 @@ pipeline {
         }
 
         stage('Check the ENV'){
+            steps {
             def getOs(){
-    String osname = System.getProperty('os.name');
-    if (osname.startsWith('Windows'))
-        return 'windows';
-    else if (osname.startsWith('Mac'))
-        return 'macosx';
-    else if (osname.contains('nux'))
-        return 'linux';
-    else
-        throw new Exception("Unsupported os: ${osname}");
-}
+                    String osname = System.getProperty('os.name');
+                    if (osname.startsWith('Windows'))
+                        return 'windows';
+                    else if (osname.startsWith('Mac'))
+                        return 'macosx';
+                    else if (osname.contains('nux'))
+                        return 'linux';
+                    else
+                        throw new Exception("Unsupported os: ${osname}");
+                }
+            }
         }
         stage ('Build') {
             steps {
