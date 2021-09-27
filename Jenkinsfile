@@ -36,7 +36,7 @@ pipeline {
                 sh ''' 
                 mvn -Dmaven.test.failure.ignore=true install
                 echo "~~~~~~~~~~~~~~~~ done ~~~~~~~~~~~~~~~~"
-                sh 'find . -name \*.jar'
+                sh 'find . -name *.jar' || true
                 '''
             }
             post {
