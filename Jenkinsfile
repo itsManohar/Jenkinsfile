@@ -15,25 +15,25 @@ pipeline {
             }
         }
 
-        stage('Check the ENV'){
-            steps {
-            def getOs(){
-                    String osname = System.getProperty('os.name');
-                    if (osname.startsWith('Windows'))
-                        return 'windows';
-                    else if (osname.startsWith('Mac'))
-                        return 'macosx';
-                    else if (osname.contains('nux'))
-                        return 'linux';
-                    else
-                        throw new Exception("Unsupported os: ${osname}");
-                }
-            }
-        }
+//         stage('Check the ENV'){
+//             steps {
+//             def getOs(){
+//                     String osname = System.getProperty('os.name');
+//                     if (osname.startsWith('Windows'))
+//                         return 'windows';
+//                     else if (osname.startsWith('Mac'))
+//                         return 'macosx';
+//                     else if (osname.contains('nux'))
+//                         return 'linux';
+//                     else
+//                         throw new Exception("Unsupported os: ${osname}");
+//                 }
+//             }
+//         }
         stage ('Build') {
             steps {
-                 bat 'mvn -Dmaven.test.failure.ignore=true install' 
-                //  sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                // bat 'mvn -Dmaven.test.failure.ignore=true install' 
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 echo "done"
             }
             post {
