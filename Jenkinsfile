@@ -34,6 +34,8 @@ pipeline {
             steps {
                 // bat 'mvn -Dmaven.test.failure.ignore=true install' 
                 sh ''' 
+                echo "pwd is="
+                pwd
                 mvn -Dmaven.test.failure.ignore=true install
                 echo "~~~~~~~~~~~~~~~~ done ~~~~~~~~~~~~~~~~"
                 sh 'find . -name *.jar' || true
