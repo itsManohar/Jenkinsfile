@@ -16,21 +16,17 @@ pipeline {
         }
 
         stage('Check the ENV'){
-            def checkOs(){
-                    if (isUnix()) {
-                        def uname = sh script: 'uname', returnStdout: true
-                        if (uname.startsWith("Darwin")) {
-                            return "Macos"
-                        }
-                        // Optionally add 'else if' for other Unix OS  
-                        else {
-                            return "Linux"
-                        }
-                    }
-                    else {
-                        return "Windows"
-                    }
-                }
+            def getOs(){
+    String osname = System.getProperty('os.name');
+    if (osname.startsWith('Windows'))
+        return 'windows';
+    else if (osname.startsWith('Mac'))
+        return 'macosx';
+    else if (osname.contains('nux'))
+        return 'linux';
+    else
+        throw new Exception("Unsupported os: ${osname}");
+}
         }
         stage ('Build') {
             steps {
