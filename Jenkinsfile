@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                echo "FONR"
+                echo "Starting the pipeline"
                //  sh '''
                 //    echo "PATH = ${PATH}" || true
                 //    echo "M2_HOME = ${M2_HOME}" || true
@@ -15,6 +15,23 @@ pipeline {
             }
         }
 
+        stage('Check the ENV'){
+            def checkOs(){
+                    if (isUnix()) {
+                        def uname = sh script: 'uname', returnStdout: true
+                        if (uname.startsWith("Darwin")) {
+                            return "Macos"
+                        }
+                        // Optionally add 'else if' for other Unix OS  
+                        else {
+                            return "Linux"
+                        }
+                    }
+                    else {
+                        return "Windows"
+                    }
+                }
+        }
         stage ('Build') {
             steps {
                  bat 'mvn -Dmaven.test.failure.ignore=true install' 
