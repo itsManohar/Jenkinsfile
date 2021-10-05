@@ -33,7 +33,10 @@ pipeline {
 //             }
 //         }
         stage ('Build') {
-            when (BRANCH_NAME == 'master'){}
+            
+            when {
+         expression { BRANCH_NAME == 'master' }
+     }
             steps {
                 // bat 'mvn -Dmaven.test.failure.ignore=true install' 
                 sh ''' 
