@@ -6,6 +6,7 @@ pipeline {
     }
     stages {
         stage ('Initialize') {
+        }
             steps {
                 echo "Starting the pipeline"
                //  sh '''
@@ -13,7 +14,7 @@ pipeline {
                 //    echo "M2_HOME = ${M2_HOME}" || true
                // '''
             }
-        }
+        
 
 //         stage('Check the ENV'){
 //             steps {
