@@ -33,16 +33,28 @@ pipeline {
 //             }
 //         }
         
-            stage ('Initialize STAGE 2') {
-        
-                steps {
-                    sh '''
-                    echo "Starting the pipeline"
-                    String osname = System.getProperty('os.name');
-                    echo "osname=${osname}"
-                    '''
+            stage('Stage A') {
+            steps {
+                script {
+                    // tee log into file
+                    tee(STAGE_A_LOG_FILE) {
+                        echo 'print some Stage_A log content ...'
+                    }
                 }
-        
+            }
+        }
+        stage('Stage B') {
+            steps {
+                script {
+                    // search log file for 'Stage_A'
+                    regex = java.util.regex.Pattern.compile('some (Stage_A) log')
+                    matcher = regex.matcher(readFile(STAGE_A_LOG_FILE))
+                    if (matcher.find()) {
+                        echo "found: ${matcher.group(1)}"
+                    }
+                }
+            }
+        }
         
         
         stage ('Building STAGE') {
