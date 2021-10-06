@@ -5,7 +5,7 @@ pipeline {
         jdk 'jdk8u221'
     }
     stages {
-        stage ('Initialize') {
+        stage ('Initialize STAGE') {
         
             steps {
                 echo "Starting the pipeline"
@@ -33,33 +33,22 @@ pipeline {
 //             }
 //         }
         
-        stage('current OS'){
-            steps {
-                sh 'echo "currente OS is = " '
-                
-                def checkOs(){
-                    if (isUnix()) {
-                        def uname = sh script: 'uname', returnStdout: true
-                        if (uname.startsWith("Darwin")) {
-                            return "Macos"
-                        }
-                        // Optionally add 'else if' for other Unix OS  
-                        else {
-                            return "Linux"
-                        }
-                    }
-                    else {
-                        return "Windows"
-                    }
-                }
-            }
+        stages {
+            stage ('Initialize STAGE') {
         
+                steps {
+                    echo "Starting the pipeline"
+                    String osname = System.getProperty('os.name');
+                    echo "osname=${osname}"
+                }
         }
         
-        stage ('Build') {
+        
+        
+        stage ('Building STAGE') {
             
             when {
-         expression { BRANCH_NAME != 'master' }
+                expression { BRANCH_NAME != 'master' }
                 }
             steps {
                 // bat 'mvn -Dmaven.test.failure.ignore=true install' 
