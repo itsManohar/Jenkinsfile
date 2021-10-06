@@ -32,16 +32,24 @@ pipeline {
 //                 }
 //             }
 //         }
+        
+        stage('current OS'){
+            steps {
+                sh 'echo "currente OS is = ${os.name}" '
+            }
+        
+        }
+        
         stage ('Build') {
             
             when {
          expression { BRANCH_NAME != 'master' }
-     }
+                }
             steps {
                 // bat 'mvn -Dmaven.test.failure.ignore=true install' 
                 sh ''' 
-                echo "pwd is="
-                pwd
+                echo "pwd is= ${PWD}"
+                
                 mvn -Dmaven.test.failure.ignore=true install
                 echo "~~~~~~~~~~~~~~~~ done ~~~~~~~~~~~~~~~~"
                 sh 'find . -name *.jar' || true
