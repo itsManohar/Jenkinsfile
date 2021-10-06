@@ -35,7 +35,7 @@ pipeline {
         
         stage('current OS'){
             steps {
-                sh 'echo "currente OS is = ${os.name}" '
+                sh 'echo "currente OS is = " '
             }
         
         }
