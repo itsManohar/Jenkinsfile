@@ -34,12 +34,14 @@ pipeline {
 //         }
         
         stages {
-            stage ('Initialize STAGE') {
+            stage ('Initialize STAGE 2') {
         
                 steps {
+                    sh '''
                     echo "Starting the pipeline"
                     String osname = System.getProperty('os.name');
                     echo "osname=${osname}"
+                    '''
                 }
         }
         
