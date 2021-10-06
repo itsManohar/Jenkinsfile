@@ -33,7 +33,6 @@ pipeline {
 //             }
 //         }
         
-        stages {
             stage ('Initialize STAGE 2') {
         
                 steps {
@@ -43,7 +42,6 @@ pipeline {
                     echo "osname=${osname}"
                     '''
                 }
-        }
         
         
         
